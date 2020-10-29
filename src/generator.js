@@ -2,6 +2,7 @@ const puppeteer = require("puppeteer");
 const express = require("express");
 const fs = require("fs");
 const http = require("http");
+const rimraf = require('rimraf');
 const { join, dirname } = require("path");
 
 exports.generateOgImages = async (imageGenerationJobs) => {
@@ -19,12 +20,11 @@ exports.generateOgImages = async (imageGenerationJobs) => {
     ensureThatImageDirExists(imgPath);
     await page.screenshot({ path: imgPath, clip: { x: 0, y: 0, ...size } });
 
-    fs.unlinkSync(join("public", componentPath, "index.html"));
-
     const printPath = `${imgPath.replace("public", "")} ${size.width}x${size.height}`;
     console.log(`🖼  created Image: ${printPath}`);
   }
 
+  rimraf.sync(join("public", componentPath.split('/')[0]))
   await browser.close();
 };
 
