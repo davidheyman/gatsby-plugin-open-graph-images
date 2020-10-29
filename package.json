@@ -29,8 +29,7 @@
   "homepage": "https://github.com/squer-solutions/gatsby-plugin-open-graph-images#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "puppeteer": "^3.3.0",
-    "rimraf": "^3.0.2"
+    "puppeteer": "^3.3.0"
   },
   "devDependencies": {
     "prettier": "^2.0.5"

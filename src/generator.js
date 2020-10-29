@@ -2,7 +2,6 @@ const puppeteer = require("puppeteer");
 const express = require("express");
 const fs = require("fs");
 const http = require("http");
-const rimraf = require('rimraf');
 const { join, dirname } = require("path");
 
 exports.generateOgImages = async (imageGenerationJobs) => {
@@ -45,7 +44,7 @@ const ensureThatImageDirExists = (path) => {
     fs.statSync(targetDir);
   } catch (err) {
     if (err.code === "ENOENT") {
-      rimraf.sync(targetDir);
+      fs.mkdirSync(targetDir);
     }
   }
 };
