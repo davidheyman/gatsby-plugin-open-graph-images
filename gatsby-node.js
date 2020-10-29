@@ -2,7 +2,7 @@ const { generateOgImages } = require("./src/generator");
 const { config } = require("./src/config");
 const { imageGenerationJobCache } = require("./src/cache");
 
-exports.onPreInit = async ({ cache }, pluginConfig) => {
+exports.onPreBootstrap = async ({ cache }, pluginConfig) => {
   config.init(pluginConfig);
   await imageGenerationJobCache.init(cache);
 };
