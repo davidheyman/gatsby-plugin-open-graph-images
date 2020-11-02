@@ -9,10 +9,12 @@ exports.generateOgImages = async (imageGenerationJobs) => {
   const servingUrl = await getServingUrl();
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
+  let generatedPath = null;
 
   for (const imageGenerationJob of imageGenerationJobs) {
     const { componentPath, imgPath, size } = imageGenerationJob;
     const componentUrl = `${servingUrl}/${componentPath}`;
+    if (componentPath.split('/')[0]) generatedPath = componentPath.split('/')[0]
 
     await page.goto(componentUrl);
     await page.setViewport(size);
@@ -24,7 +26,7 @@ exports.generateOgImages = async (imageGenerationJobs) => {
     console.log(`🖼  created Image: ${printPath}`);
   }
 
-  rimraf.sync(join("public", componentPath.split('/')[0]))
+  rimraf.sync(join("public", generatedPath))
   await browser.close();
 };
 
