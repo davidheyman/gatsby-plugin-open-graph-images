@@ -26,7 +26,8 @@ exports.generateOgImages = async (imageGenerationJobs) => {
     console.log(`🖼  created Image: ${printPath}`);
   }
 
-  rimraf.sync(join("public", generatedPath))
+  rimraf.sync(join("public", generatedPath));
+  rimraf.sync(join("public", "page-data", generatedPath));
   await browser.close();
 };
 
